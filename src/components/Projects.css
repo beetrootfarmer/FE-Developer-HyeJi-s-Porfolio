@@ -1,0 +1,12 @@
+.projects {
+  border-top: 1px solid var(--line);
+}
+
+.projects-heading {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  margin-top: 0.5rem;
+}
+
+.project-list {
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
