@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import type { Project } from '../data/types';
 import './ProjectDetail.css';
@@ -9,6 +9,8 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
+  const galleryRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose();
@@ -44,19 +46,27 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
           ×
         </button>
 
-        <motion.img
-          className="project-detail-image"
-          src={project.images[0]?.src}
-          alt={project.images[0]?.alt ?? ''}
-          layoutId={`image-${project.slug}`}
-        />
+        <motion.div className="project-detail-gallery" ref={galleryRef} data-cursor-hover>
+          <motion.div
+            className="project-detail-gallery-track"
+            drag={project.images.length > 1 ? 'x' : false}
+            dragConstraints={galleryRef}
+            dragElastic={0.08}
+          >
+            {project.images.map((image, index) => (
+              <motion.img
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                draggable={false}
+                layoutId={index === 0 ? `image-${project.slug}` : undefined}
+              />
+            ))}
+          </motion.div>
+        </motion.div>
 
         {project.images.length > 1 && (
-          <div className="project-detail-gallery">
-            {project.images.slice(1).map((image) => (
-              <img key={image.src} src={image.src} alt={image.alt} />
-            ))}
-          </div>
+          <span className="project-detail-gallery-hint">← Drag to see more →</span>
         )}
 
         <motion.div
