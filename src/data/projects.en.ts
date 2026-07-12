@@ -24,10 +24,10 @@ export const projectsEn: Project[] = [
       "Foundation's public data competition.",
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
-      { src: '/1.beeve/beeve1.png', alt: 'Beeve 6-Data radar score screen' },
-      { src: '/1.beeve/beeve3.png', alt: 'Beeve AI daily schedule screen' },
-      { src: '/1.beeve/beeve4.png', alt: 'Beeve fitness stats screen' },
-      { src: '/1.beeve/beeve2.png', alt: 'Beeve outfit log screen' },
+      { src: '/1.beeve/beeve1.jpg', alt: 'Beeve 6-Data radar score screen' },
+      { src: '/1.beeve/beeve3.jpg', alt: 'Beeve AI daily schedule screen' },
+      { src: '/1.beeve/beeve4.jpg', alt: 'Beeve fitness stats screen' },
+      { src: '/1.beeve/beeve2.jpg', alt: 'Beeve outfit log screen' },
     ],
     code: {
       label: 'Pose estimation frame-skip optimization',

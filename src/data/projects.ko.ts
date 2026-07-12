@@ -21,10 +21,10 @@ export const projectsKo: Project[] = [
       '렌더링을 달성했습니다. 이 프로젝트로 국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했습니다.',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
-      { src: '/1.beeve/beeve1.png', alt: 'Beeve 6-Data 레이더 점수 화면' },
-      { src: '/1.beeve/beeve3.png', alt: 'Beeve AI 일정 관리 화면' },
-      { src: '/1.beeve/beeve4.png', alt: 'Beeve 체력 통계 화면' },
-      { src: '/1.beeve/beeve2.png', alt: 'Beeve 옷 기록 화면' },
+      { src: '/1.beeve/beeve1.jpg', alt: 'Beeve 6-Data 레이더 점수 화면' },
+      { src: '/1.beeve/beeve3.jpg', alt: 'Beeve AI 일정 관리 화면' },
+      { src: '/1.beeve/beeve4.jpg', alt: 'Beeve 체력 통계 화면' },
+      { src: '/1.beeve/beeve2.jpg', alt: 'Beeve 옷 기록 화면' },
     ],
     code: {
       label: 'MediaPipe 포즈 추정 프레임 스킵 최적화',
