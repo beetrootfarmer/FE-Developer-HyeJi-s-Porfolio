@@ -1,7 +1,26 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '../i18n/LocaleContext';
 import './Hero.css';
 
+const copy = {
+  en: {
+    titleLine1: 'HYE JI',
+    titleAccent: 'ASKS QUESTIONS',
+    tagline: 'Art came from questions. So does good code.',
+    sub: 'A fine arts major turned 3-year frontend developer, still asking why — now exploring better answers in code.',
+  },
+  ko: {
+    titleLine1: '혜지는',
+    titleAccent: '질문합니다',
+    tagline: '작품은 질문에서 나왔다. 좋은 코드도 질문에서 나온다.',
+    sub: '순수예술을 전공했고, 지금은 3년차 프론트엔드 개발자입니다. 여전히 왜냐고 묻고, 이제는 코드로 더 나은 답을 탐구합니다.',
+  },
+} as const;
+
 export function Hero() {
+  const { locale } = useLocale();
+  const text = copy[locale];
+
   return (
     <section className="hero" id="top">
       <div className="hero-copy">
@@ -20,10 +39,19 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          HYE JI
+          {text.titleLine1}
           <br />
-          <span className="hero-title-accent">MAKES THINGS</span>
+          <span className="hero-title-accent">{text.titleAccent}</span>
         </motion.h1>
+
+        <motion.p
+          className="hero-tagline"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {text.tagline}
+        </motion.p>
 
         <motion.p
           className="hero-sub"
@@ -31,8 +59,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
         >
-          A bachelor-trained designer who now builds the interfaces she used to
-          only draw. This is an archive of the work in between.
+          {text.sub}
         </motion.p>
       </div>
 
