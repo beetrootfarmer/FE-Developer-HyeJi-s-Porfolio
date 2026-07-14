@@ -10,7 +10,7 @@ interface SpiralParams {
   cy?: number;
 }
 
-function buildSpiralPath({ turns = 4.5, a = 2, b = 0.28, steps = 400, cx = 300, cy = 300 }: SpiralParams) {
+function buildSpiralPath({ turns = 4.5, a = 17, b = 0.28, steps = 400, cx = 300, cy = 300 }: SpiralParams) {
   let d = '';
   for (let i = 0; i <= steps; i++) {
     const theta = (i / steps) * turns * 2 * Math.PI;
