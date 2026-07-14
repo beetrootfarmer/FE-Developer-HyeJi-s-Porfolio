@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useLocale } from '../i18n/LocaleContext';
+import { SpiralHero } from './SpiralHero';
 import './Hero.css';
 
 const copy = {
@@ -70,22 +71,7 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.2 }}
         aria-hidden="true"
       >
-        <motion.div
-          className="figure-shape figure-circle"
-          animate={{ y: [0, -18, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="figure-shape figure-square"
-          animate={{ rotate: [0, 15, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="figure-shape figure-blob"
-          animate={{ y: [0, 14, 0], rotate: [0, -8, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <div className="figure-face" />
+        <SpiralHero />
       </motion.div>
 
       <motion.div
