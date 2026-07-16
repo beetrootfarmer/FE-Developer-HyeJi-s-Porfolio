@@ -8,7 +8,7 @@ export const projectsEn: Project[] = [
     title: 'Beeve',
     role: 'PM & Frontend',
     summary:
-      "A fitness-measurement service built on Korea's national fitness public dataset — heart rate and reaction time, measured with nothing but a phone's camera and sensors.",
+      "A fitness-measurement service built on Korea's national fitness public dataset — heart rate and reaction time, measured with nothing but a phone's camera and sensors. Now live on the iOS App Store.",
     description:
       "Ongoing since September 2025, built as PM and frontend engineer: a service that measures " +
       "physical fitness using only a smartphone's camera and sensors, powered by Korea's " +
@@ -21,7 +21,7 @@ export const projectsEn: Project[] = [
       "any reaction under 100ms is auto-rejected as a false start. Pose estimation was optimized by " +
       "skipping inference when a video frame hasn't changed and delegating to the GPU, bringing " +
       "rendering to a smooth 60fps. The project won 2nd place at the Korea Sports Promotion " +
-      "Foundation's public data competition.",
+      "Foundation's public data competition, and has since launched on the iOS App Store.",
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
       { src: '/1.beeve/beeve1.jpg', alt: 'Beeve 6-Data radar score screen' },
@@ -45,7 +45,7 @@ PoseLandmarker.createFromOptions({
   runningMode: 'VIDEO', // optimized for continuous frames
 });`,
     },
-    liveUrl: '',
+    liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
     repoUrl: '',
   },
   {

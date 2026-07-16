@@ -8,7 +8,7 @@ export const projectsKo: Project[] = [
     title: 'Beeve',
     role: 'PM & Frontend',
     summary:
-      '국민체력100 공공데이터를 활용해, 별도 장비 없이 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스.',
+      '국민체력100 공공데이터를 활용해, 별도 장비 없이 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스. iOS 앱스토어 정식 출시.',
     description:
       '2025년 9월부터 진행 중인 프로젝트로, PM 겸 프론트엔드로 참여해 국민체력100 공공데이터를 ' +
       '기반으로 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스를 만들었습니다. 심박수는 ' +
@@ -18,7 +18,8 @@ export const projectsKo: Project[] = [
       '감지하고, Web Audio API로 카운트다운 신호음을 재생한 뒤 performance.now() 기준으로 반응 시간을 ' +
       '측정했으며, 100ms 이하의 선행 반응은 코드 레벨에서 자동으로 무효 처리했습니다. MediaPipe 포즈 ' +
       '추정에서는 프레임 변화가 없을 때 추론을 건너뛰고 GPU로 위임하는 방식으로 최적화해 60fps의 자연스러운 ' +
-      '렌더링을 달성했습니다. 이 프로젝트로 국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했습니다.',
+      '렌더링을 달성했습니다. 이 프로젝트로 국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, ' +
+      '현재 iOS 앱스토어에 정식 출시되어 있습니다.',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
       { src: '/1.beeve/beeve1.jpg', alt: 'Beeve 6-Data 레이더 점수 화면' },
@@ -42,7 +43,7 @@ PoseLandmarker.createFromOptions({
   runningMode: 'VIDEO', // 연속 프레임 최적화
 });`,
     },
-    liveUrl: '',
+    liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
     repoUrl: '',
   },
   {
