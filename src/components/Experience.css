@@ -1,0 +1,143 @@
+.experience {
+  border-top: 1px solid var(--line);
+}
+
+.experience-block {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.experience-block:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.experience-block-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---- career ---- */
+.experience-jobs {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 4.5vw, 3.25rem);
+}
+
+.experience-job {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  max-width: 68ch;
+  align-items: start;
+}
+
+.experience-job-mark {
+  color: var(--accent);
+  margin-top: 0.35em;
+  flex-shrink: 0;
+}
+
+.experience-job-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.experience-job-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.9rem;
+}
+
+.experience-job-org {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  text-transform: none;
+}
+
+.experience-job-period {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--fg-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.experience-job-role {
+  font-size: 0.88rem;
+  color: var(--fg-dim);
+}
+
+.experience-job-points {
+  margin: 0.3rem 0 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.experience-job-points li {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+
+.experience-job-points li::marker {
+  color: var(--accent);
+}
+
+/* ---- education ---- */
+.experience-education {
+  display: flex;
+  flex-direction: column;
+}
+
+.experience-edu-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.experience-edu-row:first-child {
+  padding-top: 0;
+}
+
+.experience-edu-org {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.experience-edu-detail {
+  color: var(--fg-dim);
+  font-size: 0.9rem;
+}
+
+.experience-edu-period {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--fg-dim);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .experience-edu-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .experience-edu-period {
+    text-align: left;
+  }
+}
