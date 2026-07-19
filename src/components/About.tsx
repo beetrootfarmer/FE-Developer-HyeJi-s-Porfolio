@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useLocale } from '../i18n/LocaleContext';
+import { SpiralMark } from './SpiralMark';
 import './About.css';
 
 const facts = [
@@ -68,13 +69,18 @@ export function About() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
           >
-            <span className="about-essay-index">0{index + 1}</span>
-            <h3 className="about-essay-title">{essay.title}</h3>
-            {essay.paragraphs.map((paragraph, pIndex) => (
-              <p className="about-essay-para" key={pIndex}>
-                {paragraph}
-              </p>
-            ))}
+            <SpiralMark className="about-essay-mark" size={30} turns={2.2 + index * 0.8} />
+            <div className="about-essay-body">
+              <div className="about-essay-heading">
+                <h3 className="about-essay-title">{essay.title}</h3>
+                <span className="about-essay-index">0{index + 1}</span>
+              </div>
+              {essay.paragraphs.map((paragraph, pIndex) => (
+                <p className="about-essay-para" key={pIndex}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>

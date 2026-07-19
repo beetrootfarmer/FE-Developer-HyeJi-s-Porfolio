@@ -12,41 +12,51 @@
 .about-essay {
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 1.5rem;
-  row-gap: 0.75rem;
+  column-gap: 1.25rem;
   max-width: 62ch;
+  align-items: start;
+}
+
+.about-essay-mark {
+  color: var(--accent);
+  margin-top: 0.4em;
+  flex-shrink: 0;
+}
+
+.about-essay-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.about-essay-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
 }
 
 .about-essay-index {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.1em;
   color: var(--fg-dim);
-  padding-top: 0.35em;
 }
 
 .about-essay-title {
-  grid-column: 2;
   font-size: clamp(1.35rem, 2.6vw, 1.9rem);
   text-transform: none;
 }
 
 .about-essay-para {
-  grid-column: 2;
   font-size: clamp(1rem, 1.3vw, 1.1rem);
   line-height: 1.65;
   color: var(--fg-dim);
 }
 
 @media (max-width: 640px) {
-  .about-essay {
-    grid-template-columns: 1fr;
-  }
-
-  .about-essay-index,
-  .about-essay-title,
-  .about-essay-para {
-    grid-column: 1;
+  .about-essay-mark {
+    width: 24px;
+    height: 24px;
   }
 }
 
