@@ -1,5 +1,6 @@
 import type { Project } from './types';
 import { placeholder02, placeholder03 } from './placeholders';
+import { withBase } from '../lib/asset';
 
 export const projectsKo: Project[] = [
   {
@@ -22,10 +23,10 @@ export const projectsKo: Project[] = [
       '현재 iOS 앱스토어에 정식 출시되어 있습니다.',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
-      { src: '/1.beeve/beeve1.jpg', alt: 'Beeve 6-Data 레이더 점수 화면' },
-      { src: '/1.beeve/beeve3.jpg', alt: 'Beeve AI 일정 관리 화면' },
-      { src: '/1.beeve/beeve4.jpg', alt: 'Beeve 체력 통계 화면' },
-      { src: '/1.beeve/beeve2.jpg', alt: 'Beeve 옷 기록 화면' },
+      { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data 레이더 점수 화면' },
+      { src: withBase('1.beeve/beeve3.jpg'), alt: 'Beeve AI 일정 관리 화면' },
+      { src: withBase('1.beeve/beeve4.jpg'), alt: 'Beeve 체력 통계 화면' },
+      { src: withBase('1.beeve/beeve2.jpg'), alt: 'Beeve 옷 기록 화면' },
     ],
     code: {
       label: 'MediaPipe 포즈 추정 프레임 스킵 최적화',

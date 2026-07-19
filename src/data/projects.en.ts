@@ -1,5 +1,6 @@
 import type { Project } from './types';
 import { placeholder02, placeholder03 } from './placeholders';
+import { withBase } from '../lib/asset';
 
 export const projectsEn: Project[] = [
   {
@@ -24,10 +25,10 @@ export const projectsEn: Project[] = [
       "Foundation's public data competition, and has since launched on the iOS App Store.",
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
-      { src: '/1.beeve/beeve1.jpg', alt: 'Beeve 6-Data radar score screen' },
-      { src: '/1.beeve/beeve3.jpg', alt: 'Beeve AI daily schedule screen' },
-      { src: '/1.beeve/beeve4.jpg', alt: 'Beeve fitness stats screen' },
-      { src: '/1.beeve/beeve2.jpg', alt: 'Beeve outfit log screen' },
+      { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data radar score screen' },
+      { src: withBase('1.beeve/beeve3.jpg'), alt: 'Beeve AI daily schedule screen' },
+      { src: withBase('1.beeve/beeve4.jpg'), alt: 'Beeve fitness stats screen' },
+      { src: withBase('1.beeve/beeve2.jpg'), alt: 'Beeve outfit log screen' },
     ],
     code: {
       label: 'Pose estimation frame-skip optimization',
