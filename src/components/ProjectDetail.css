@@ -116,6 +116,69 @@
   padding: 0.25rem 0.65rem;
 }
 
+.project-detail-problems {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.project-detail-problem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.project-detail-problem-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.project-detail-problem-mark {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.project-detail-problem-title {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  text-transform: none;
+}
+
+.project-detail-problem-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.4rem 1rem;
+}
+
+.project-detail-problem-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  padding-top: 0.15em;
+}
+
+.project-detail-problem-row p {
+  color: var(--fg-dim);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+.project-detail-problem .project-detail-code {
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 560px) {
+  .project-detail-problem-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
+
 .project-detail-code {
   border: 1px solid var(--line);
   border-radius: 10px;

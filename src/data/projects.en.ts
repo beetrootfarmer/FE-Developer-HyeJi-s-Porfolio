@@ -13,16 +13,9 @@ export const projectsEn: Project[] = [
     description:
       "Ongoing since September 2025, built as PM and frontend engineer: a service that measures " +
       "physical fitness using only a smartphone's camera and sensors, powered by Korea's " +
-      "national fitness public dataset — no extra hardware required. For heart rate, I designed an " +
-      "rPPG pipeline from scratch: the MediaStream API and a torch constraint turn on the flash, and " +
-      "changes in the red-channel pixel values become a blood-flow signal, denoised with a moving " +
-      "average and split across three sub-intervals for a robust reading. For reaction time, " +
-      "DeviceMotionEvent tracks composite acceleration to auto-detect a stable starting position, a " +
-      "Web Audio API oscillator plays the countdown cue, and performance.now() times the response — " +
-      "any reaction under 100ms is auto-rejected as a false start. Pose estimation was optimized by " +
-      "skipping inference when a video frame hasn't changed and delegating to the GPU, bringing " +
-      "rendering to a smooth 60fps. The project won 2nd place at the Korea Sports Promotion " +
-      "Foundation's public data competition, and has since launched on the iOS App Store.",
+      "national fitness public dataset. The project won 2nd place at the Korea Sports Promotion " +
+      "Foundation's public data competition and has since launched on the iOS App Store. Below are " +
+      "three core problems from development and how I solved them.",
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
       { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data radar score screen' },
@@ -30,10 +23,47 @@ export const projectsEn: Project[] = [
       { src: withBase('1.beeve/beeve4.jpg'), alt: 'Beeve fitness stats screen' },
       { src: withBase('1.beeve/beeve2.jpg'), alt: 'Beeve outfit log screen' },
     ],
-    code: {
-      label: 'Pose estimation frame-skip optimization',
-      language: 'ts',
-      code: `// Skip inference if the frame hasn't changed
+    problems: [
+      {
+        title: 'Heart rate via rPPG',
+        problem:
+          "Measuring heart rate from nothing but a mobile browser meant solving for signal noise and " +
+          "lighting conditions. Existing rPPG libraries didn't work within mobile browser constraints, " +
+          "so I built the pipeline from scratch.",
+        solution:
+          "The MediaStream API and a torch constraint turn on the flash, and per-frame changes in the " +
+          "red-channel pixel average become a blood-flow signal. A 5-point moving average filters noise, " +
+          "and peaks are detected using a dynamic threshold (80% of the max) with a minimum interval, " +
+          "then inverted into BPM. The 15-second window is split into three sub-intervals, each computed " +
+          "independently and averaged for a noise-resistant reading.",
+        result: 'Valid-range filtering drops outliers, and the three-interval average keeps readings stable.',
+      },
+      {
+        title: 'Reaction time via accelerometer',
+        problem:
+          "Measuring reaction time with nothing but a phone's sensors meant handling per-device " +
+          "permission models and sensor noise. iOS 13+'s DeviceMotionEvent permission model " +
+          "(requestPermission) and the Android branch were the trickiest part.",
+        solution:
+          "Composite acceleration (√x²+y²+z²) auto-starts a measurement once stability crosses a 90-point " +
+          "threshold. A Web Audio API oscillator plays the countdown cue, and performance.now() times the " +
+          "gap between the cue and the detected movement. useRef sidesteps a stale-closure bug, and any " +
+          "reaction under 100ms is auto-rejected as a false start at the code level.",
+        result: 'The best of three valid readings is kept, and false starts are auto-invalidated for reliability.',
+      },
+      {
+        title: 'Pose estimation rendering optimization',
+        problem:
+          "Calling detectForVideo() on every frame overloaded the CPU/GPU and dropped frames. setInterval " +
+          "made it worse, since it runs independently of the browser's render cycle and drifts out of sync.",
+        solution:
+          "Inference is skipped entirely when the video frame hasn't changed, and delegated to the GPU " +
+          "for the frames that do run.",
+        result: 'Removing redundant inference brought rendering to a smooth, consistent 60fps.',
+        code: {
+          label: 'Frame skip + GPU delegation',
+          language: 'ts',
+          code: `// Skip inference if the frame hasn't changed
 if (video.currentTime === lastVideoTime) {
   requestAnimationFrame(detect);
   return;
@@ -45,7 +75,9 @@ PoseLandmarker.createFromOptions({
   },
   runningMode: 'VIDEO', // optimized for continuous frames
 });`,
-    },
+        },
+      },
+    ],
     liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
     repoUrl: '',
   },

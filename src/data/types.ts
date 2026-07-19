@@ -10,6 +10,14 @@ export interface ProjectCodeSnippet {
   code: string;
 }
 
+export interface ProjectProblem {
+  title: string;
+  problem: string;
+  solution: string;
+  result: string;
+  code?: ProjectCodeSnippet;
+}
+
 export interface Project {
   slug: string;
   year: string;
@@ -19,6 +27,7 @@ export interface Project {
   description: string;
   tags: string[];
   images: ProjectImage[];
+  problems?: ProjectProblem[];
   code?: ProjectCodeSnippet;
   liveUrl?: string;
   repoUrl?: string;

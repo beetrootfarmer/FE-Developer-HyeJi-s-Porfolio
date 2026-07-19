@@ -12,15 +12,9 @@ export const projectsKo: Project[] = [
       '국민체력100 공공데이터를 활용해, 별도 장비 없이 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스. iOS 앱스토어 정식 출시.',
     description:
       '2025년 9월부터 진행 중인 프로젝트로, PM 겸 프론트엔드로 참여해 국민체력100 공공데이터를 ' +
-      '기반으로 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스를 만들었습니다. 심박수는 ' +
-      'MediaStream API와 torch constraint로 플래시를 켠 뒤 적색 채널 픽셀값을 혈류 신호로 활용하는 ' +
-      'rPPG 파이프라인을 직접 설계했고, 이동평균 노이즈 필터링과 15초 구간 3분할 평균으로 측정값의 ' +
-      '강건성을 확보했습니다. 반응속도는 DeviceMotionEvent로 합성 가속도를 계산해 안정 상태를 자동 ' +
-      '감지하고, Web Audio API로 카운트다운 신호음을 재생한 뒤 performance.now() 기준으로 반응 시간을 ' +
-      '측정했으며, 100ms 이하의 선행 반응은 코드 레벨에서 자동으로 무효 처리했습니다. MediaPipe 포즈 ' +
-      '추정에서는 프레임 변화가 없을 때 추론을 건너뛰고 GPU로 위임하는 방식으로 최적화해 60fps의 자연스러운 ' +
-      '렌더링을 달성했습니다. 이 프로젝트로 국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, ' +
-      '현재 iOS 앱스토어에 정식 출시되어 있습니다.',
+      '기반으로 스마트폰 카메라와 센서만으로 체력을 측정하는 서비스를 만들었습니다. 이 프로젝트로 ' +
+      '국민체육진흥공단 공공데이터 경진대회에서 2위를 수상했으며, 현재 iOS 앱스토어에 정식 출시되어 ' +
+      '있습니다. 개발 과정에서 마주한 핵심 문제 세 가지와 해결 과정은 아래와 같습니다.',
     tags: ['Next.js', 'TypeScript', 'MediaPipe', 'Node.js', 'PostgreSQL', 'Docker'],
     images: [
       { src: withBase('1.beeve/beeve1.jpg'), alt: 'Beeve 6-Data 레이더 점수 화면' },
@@ -28,10 +22,44 @@ export const projectsKo: Project[] = [
       { src: withBase('1.beeve/beeve4.jpg'), alt: 'Beeve 체력 통계 화면' },
       { src: withBase('1.beeve/beeve2.jpg'), alt: 'Beeve 옷 기록 화면' },
     ],
-    code: {
-      label: 'MediaPipe 포즈 추정 프레임 스킵 최적화',
-      language: 'ts',
-      code: `// 프레임 변화 없으면 추론 skip
+    problems: [
+      {
+        title: 'rPPG 기반 심박수 측정',
+        problem:
+          '모바일 브라우저만으로 심박수를 측정하려면 신호 노이즈와 조명 문제를 해결해야 했습니다. ' +
+          '기존 rPPG 라이브러리는 모바일 브라우저 환경 제약 때문에 그대로 쓸 수 없어 직접 구현하기로 했습니다.',
+        solution:
+          'MediaStream API와 torch constraint로 플래시를 켠 뒤, 프레임마다 적색 채널 평균값을 추출해 ' +
+          '혈류 신호로 활용하는 파이프라인을 설계했습니다. 5점 이동평균으로 노이즈를 걸러내고, 동적 ' +
+          '임계값(최댓값의 80%)과 최소 간격 기반으로 피크를 감지해 BPM을 역산했습니다. 15초 구간을 ' +
+          '3분할해 구간별로 독립 계산한 뒤 평균을 내는 방식으로 노이즈에 강건하게 만들었습니다.',
+        result: 'BPM 유효 범위 필터링으로 outlier를 제거하고, 3구간 평균으로 안정적인 측정값을 확보했습니다.',
+      },
+      {
+        title: '가속도계 기반 반응속도 측정',
+        problem:
+          '별도 장비 없이 스마트폰 센서만으로 반응속도를 측정하려면 기기별 권한 모델과 센서 노이즈 ' +
+          '처리가 필요했습니다. iOS 13+의 DeviceMotionEvent 권한 모델(requestPermission)과 Android ' +
+          '분기 처리가 특히 까다로웠습니다.',
+        solution:
+          '합성 가속도(√x²+y²+z²)를 계산해 안정성 점수가 90점 이상일 때 측정을 자동으로 시작하도록 ' +
+          '설계했습니다. Web Audio API Oscillator로 카운트다운 신호음을 구현하고, performance.now() ' +
+          '기준으로 신호와 움직임 감지 사이의 시간차를 반응속도로 확정했습니다. useRef로 클로저 문제를 ' +
+          '해결하고, 100ms 이하의 선행 반응은 코드 레벨에서 자동으로 차단했습니다.',
+        result: '3회 측정 중 유효 최솟값을 채택하고, 선행 반응을 자동 무효 처리해 측정 신뢰도를 확보했습니다.',
+      },
+      {
+        title: 'MediaPipe 포즈 추정 렌더링 최적화',
+        problem:
+          'detectForVideo()를 매 프레임 호출하니 CPU/GPU 부하로 프레임 드롭이 발생했습니다. setInterval은 ' +
+          '브라우저 렌더링 사이클과 무관하게 실행되어 타이밍이 어긋난다는 것도 문제였습니다.',
+        solution:
+          '비디오 프레임에 변화가 없으면 추론 자체를 건너뛰고, GPU로 추론을 위임해 속도를 끌어올렸습니다.',
+        result: '중복 추론을 제거해 60fps의 자연스러운 렌더링을 달성했습니다.',
+        code: {
+          label: '프레임 스킵 + GPU 위임',
+          language: 'ts',
+          code: `// 프레임 변화 없으면 추론 skip
 if (video.currentTime === lastVideoTime) {
   requestAnimationFrame(detect);
   return;
@@ -43,7 +71,9 @@ PoseLandmarker.createFromOptions({
   },
   runningMode: 'VIDEO', // 연속 프레임 최적화
 });`,
-    },
+        },
+      },
+    ],
     liveUrl: 'https://apps.apple.com/kr/app/beeve/id6759857773',
     repoUrl: '',
   },

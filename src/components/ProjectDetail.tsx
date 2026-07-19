@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import type { Project } from '../data/types';
+import { SpiralMark } from './SpiralMark';
 import './ProjectDetail.css';
 
 interface ProjectDetailProps {
@@ -89,6 +90,45 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               <li key={tag}>{tag}</li>
             ))}
           </ul>
+
+          {project.problems && (
+            <div className="project-detail-problems">
+              {project.problems.map((item, index) => (
+                <div className="project-detail-problem" key={item.title}>
+                  <div className="project-detail-problem-heading">
+                    <SpiralMark
+                      className="project-detail-problem-mark"
+                      size={26}
+                      turns={2.2 + index * 0.7}
+                    />
+                    <h3 className="project-detail-problem-title">{item.title}</h3>
+                  </div>
+
+                  <div className="project-detail-problem-row">
+                    <span className="project-detail-problem-label">Problem</span>
+                    <p>{item.problem}</p>
+                  </div>
+                  <div className="project-detail-problem-row">
+                    <span className="project-detail-problem-label">Solution</span>
+                    <p>{item.solution}</p>
+                  </div>
+                  <div className="project-detail-problem-row">
+                    <span className="project-detail-problem-label">Result</span>
+                    <p>{item.result}</p>
+                  </div>
+
+                  {item.code && (
+                    <div className="project-detail-code">
+                      <span className="project-detail-code-label">{item.code.label}</span>
+                      <pre>
+                        <code>{item.code.code}</code>
+                      </pre>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
 
           {project.code && (
             <div className="project-detail-code">
