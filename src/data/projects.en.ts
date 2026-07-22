@@ -82,16 +82,60 @@ PoseLandmarker.createFromOptions({
     repoUrl: '',
   },
   {
-    slug: 'project-two',
-    year: '2024',
-    title: 'Project Two',
-    role: 'Frontend Engineering',
-    summary: 'A short one-line summary of what this project is and why it exists.',
+    slug: 'myfarm',
+    year: '2025',
+    title: 'MyFarm+',
+    role: 'Frontend',
+    summary:
+      'A hybrid smart-farm management app built at Genesis Nest — from map marker rendering performance to a token-security architecture overhaul.',
     description:
-      'Longer case-study text goes here — the problem, your approach, the ' +
-      'design decisions you made, and the outcome.',
-    tags: ['Next.js', 'Framer Motion'],
-    images: [{ src: placeholder02, alt: 'Project Two cover' }],
+      'Built at Genesis Nest as a frontend engineer between May and August 2025: a hybrid app for ' +
+      'managing smart farms. From map marker rendering performance to cross-platform shared ' +
+      'components, here are four core problems from development and how I solved them.',
+    tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+    images: [{ src: placeholder02, alt: 'MyFarm+ cover' }],
+    problems: [
+      {
+        title: 'Map marker rendering optimization',
+        problem:
+          'Re-rendering every field marker on the map on each update caused a real performance hit. ' +
+          "I looked at detecting only the markers whose data had actually changed, instead of " +
+          "re-rendering the whole set.",
+        solution:
+          'Memoized the marker-rendering function with useCallback so only markers with changed data ' +
+          'get updated.',
+        result: 'Only changed markers re-render now, eliminating unnecessary renders.',
+      },
+      {
+        title: 'Per-device safe-area handling via App Bridge',
+        problem:
+          'Notch and home-bar heights vary by device, so the app bar padding broke inconsistently ' +
+          'across devices.',
+        solution:
+          'Used App Bridge to pass the native safe-area values through to the web view and adjust ' +
+          'padding dynamically.',
+        result: 'UI stayed consistent across every device.',
+      },
+      {
+        title: 'Token security architecture',
+        problem:
+          'The existing localStorage approach left tokens exposed to theft via XSS. I made the case ' +
+          'to the team for adopting a BFF pattern.',
+        solution:
+          'Used a Next.js Route Handler as the BFF and switched to HttpOnly, Secure, ' +
+          'SameSite=strict cookies.',
+        result: 'Blocked client-side JS from ever touching the token — zero token-related incidents since launch.',
+      },
+      {
+        title: 'Cross-platform shared components',
+        problem:
+          'UI diverged between the app and web environments, and duplicate code kept piling up. I ' +
+          'looked at a Shadcn UI + CVA foundation for components that work the same regardless of ' +
+          'platform.',
+        solution: 'Built a 33-component shared library, cutting duplicate code by roughly 40%.',
+        result: 'A reusable component library that works across both the app and the web.',
+      },
+    ],
     liveUrl: '',
     repoUrl: '',
   },

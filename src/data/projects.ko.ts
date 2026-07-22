@@ -78,16 +78,56 @@ PoseLandmarker.createFromOptions({
     repoUrl: '',
   },
   {
-    slug: 'project-two',
-    year: '2024',
-    title: '프로젝트 투',
-    role: '프론트엔드 개발',
-    summary: '이 프로젝트가 무엇이고 왜 존재하는지에 대한 한 줄 요약.',
+    slug: 'myfarm',
+    year: '2025',
+    title: '마이팜플러스',
+    role: 'Frontend',
+    summary:
+      '제네시스네스트에서 개발한 스마트 농사 관리 서비스 하이브리드 앱. 지도 마커 렌더링 최적화부터 토큰 보안 아키텍처 개편까지.',
     description:
-      '여기에 케이스 스터디 본문이 들어갑니다 — 문제 정의, 접근 방식, 디자인 결정과 그 결과까지, ' +
-      '방문자에게 설명하듯 작성해주세요.',
-    tags: ['Next.js', 'Framer Motion'],
-    images: [{ src: placeholder02, alt: '프로젝트 투 커버' }],
+      '2025년 5월부터 8월까지 제네시스네스트에서 프론트엔드로 참여해 만든 스마트 농사 관리 서비스 ' +
+      '하이브리드 앱입니다. 지도 마커 렌더링 성능 개선부터 크로스플랫폼 공통 컴포넌트 설계까지, ' +
+      '개발 과정에서 마주한 핵심 문제 네 가지와 해결 과정은 아래와 같습니다.',
+    tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
+    images: [{ src: placeholder02, alt: '마이팜플러스 커버' }],
+    problems: [
+      {
+        title: '지도 마커 렌더링 최적화',
+        problem:
+          '지도 위 필드 마커 전체를 매번 렌더링해 성능 저하가 발생했습니다. 전체 마커를 재렌더링하는 ' +
+          '대신 변경된 데이터만 감지하는 방식을 검토했습니다.',
+        solution:
+          'useCallback으로 마커 렌더링 함수를 메모이제이션해, 변경된 데이터가 있는 마커만 업데이트하도록 ' +
+          '최적화했습니다.',
+        result: '변경된 마커만 업데이트해 불필요한 렌더링을 제거했습니다.',
+      },
+      {
+        title: '앱브릿지 기기별 Safe Area 처리',
+        problem: '기기마다 노치·홈바 높이가 달라 앱바 여백이 기기별로 깨지는 문제가 있었습니다.',
+        solution:
+          '앱브릿지(App Bridge)로 네이티브에서 safe area 값을 웹으로 전달받아 동적으로 여백을 ' +
+          '조정했습니다.',
+        result: '전 기기에서 일관된 UI를 유지했습니다.',
+      },
+      {
+        title: '토큰 보안 구조 개선',
+        problem:
+          '기존 로컬스토리지 방식은 XSS 공격 시 토큰 탈취가 가능한 구조였습니다. BFF 패턴 도입 ' +
+          '필요성을 정리해 팀에 제안했습니다.',
+        solution:
+          'Next.js Route Handler를 BFF로 활용하고, HttpOnly·Secure·SameSite=strict 쿠키로 ' +
+          '전환했습니다.',
+        result: '클라이언트 JS에서 토큰 접근을 차단해, 배포 후 토큰 관련 오류 0건을 달성했습니다.',
+      },
+      {
+        title: '크로스플랫폼 공통 컴포넌트 설계',
+        problem:
+          '앱·웹 환경마다 UI가 달라져 중복 코드가 누적되고 있었습니다. Shadcn UI + CVA 기반으로 ' +
+          '플랫폼과 무관하게 동작하는 컴포넌트 설계를 검토했습니다.',
+        solution: '33개 공통 컴포넌트를 개발해 중복 코드를 약 40% 감소시켰습니다.',
+        result: '앱·웹 양쪽에서 재사용 가능한 컴포넌트 라이브러리를 구축했습니다.',
+      },
+    ],
     liveUrl: '',
     repoUrl: '',
   },
