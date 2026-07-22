@@ -1,5 +1,5 @@
 import type { Project } from './types';
-import { placeholder02, placeholder03 } from './placeholders';
+import { placeholder03 } from './placeholders';
 import { withBase } from '../lib/asset';
 
 export const projectsEn: Project[] = [
@@ -93,7 +93,12 @@ PoseLandmarker.createFromOptions({
       'managing smart farms. From map marker rendering performance to cross-platform shared ' +
       'components, here are four core problems from development and how I solved them.',
     tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
-    images: [{ src: placeholder02, alt: 'MyFarm+ cover' }],
+    images: [
+      { src: withBase('2.myFarm/myfarm1.png'), alt: 'MyFarm+ login screen' },
+      { src: withBase('2.myFarm/myfarm2.png'), alt: 'MyFarm+ phone verification screen' },
+      { src: withBase('2.myFarm/myfarm3.png'), alt: 'MyFarm+ password setup screen' },
+      { src: withBase('2.myFarm/myfarm4.png'), alt: 'MyFarm+ map-based work list screen' },
+    ],
     problems: [
       {
         title: 'Map marker rendering optimization',

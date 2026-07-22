@@ -1,5 +1,5 @@
 import type { Project } from './types';
-import { placeholder02, placeholder03 } from './placeholders';
+import { placeholder03 } from './placeholders';
 import { withBase } from '../lib/asset';
 
 export const projectsKo: Project[] = [
@@ -89,7 +89,12 @@ PoseLandmarker.createFromOptions({
       '하이브리드 앱입니다. 지도 마커 렌더링 성능 개선부터 크로스플랫폼 공통 컴포넌트 설계까지, ' +
       '개발 과정에서 마주한 핵심 문제 네 가지와 해결 과정은 아래와 같습니다.',
     tags: ['Next.js', 'TypeScript', 'Shadcn/CVA', 'App Bridge'],
-    images: [{ src: placeholder02, alt: '마이팜플러스 커버' }],
+    images: [
+      { src: withBase('2.myFarm/myfarm1.png'), alt: '마이팜플러스 로그인 화면' },
+      { src: withBase('2.myFarm/myfarm2.png'), alt: '마이팜플러스 휴대폰 번호 인증 화면' },
+      { src: withBase('2.myFarm/myfarm3.png'), alt: '마이팜플러스 비밀번호 설정 화면' },
+      { src: withBase('2.myFarm/myfarm4.png'), alt: '마이팜플러스 지도 기반 작업 목록 화면' },
+    ],
     problems: [
       {
         title: '지도 마커 렌더링 최적화',
